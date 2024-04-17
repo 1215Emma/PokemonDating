@@ -1,0 +1,40 @@
+
+.cards {
+  position: relative;
+  background-color: white;
+  border-radius: 10px;
+  min-width: 100%;
+  margin: 1rem 0;
+}
+
+.matchDescriptionOverview {
+  display: flex;
+  flex-direction: column;
+  min-height: 5rem;
+  padding: 1rem;
+}
+
+.keyBio {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.keyBio p {
+  padding: 0px 5px 5px 5px;
+  margin: 0 5px 5px 5px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.keyBio p:last-child {
+  border-right: none;
+}
+
+.keySubBio {
+  margin-top: 10px;
+}
+
+.typeContainer {
+  display: flex;
+  flex-direction: row;
+}

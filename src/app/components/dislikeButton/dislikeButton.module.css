@@ -1,0 +1,22 @@
+
+.dislike_button_container {
+  position: sticky;
+  display: inline-block;
+  bottom: 1rem;
+  left: 1rem;
+  border-radius: 50%;
+  margin-top: -60px;
+  z-index: 3;
+}
+
+.dislike_button {
+  width: 60px;
+  height: 60px;
+  margin-left: 1rem;
+  background: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 0px 8px rgba(0, 0, 0, 0.4);
+}

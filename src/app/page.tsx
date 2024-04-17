@@ -1,95 +1,68 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Image from 'next/image'
+import styles from './page.module.css'
+import Pikachu from '../../public/Pikachu.png'
+import Love_ball from '../../public/Love_ball.png'
+import X from '../../public/X.png'
+import Grass from '../../public/grass.jpg'
+import PokeFindrBackground from '../../public/PokeFindrBackground2.png'
+import LikeButton from './components/likeButton/likeButton'
+import DislikeButton from './components/dislikeButton/dislikeButton'
+import PokemonCard from './components/pokemonCard/pokemonCard'
+import PromptCard from './components/promptCard/promptCard'
+import SummaryCard from './components/summaryCard/summaryCard'
+import capitalizeFirstWord from './helpers/capitalizeFirstWord'
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+async function getServerSideProps() {
+  const res = await fetch(`https://pokeapi.co/api/v2/pokemon/1/`)
+  const repo = await res.json()
+  const res2 = await fetch('https://pokeapi.co/api/v2/pokemon/1/encounters')
+  const repo2 = await res2.json()
+  return { ...repo, ...repo2 }
+}
+
+export default async function Home() {
+  try {
+    const pokemon = await getServerSideProps()
+    const officialSprite =
+      pokemon.sprites.other['official-artwork'].front_default
+    const dreamWorldSprite = pokemon.sprites.other.dream_world.front_default
+    const homeSprite = pokemon.sprites.other.home.front_default
+
+    return (
+      <main className={styles.main}>
+        <div className={styles.logo}>
+          <Image src={Pikachu} width={150} height={150} alt="Pikachu Logo" />
+          <h1>PokeFindr</h1>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
+        <div className={styles.matchContainer}>
+          {/* <div className={styles.pokemon_name_sticky}>
+            <h2 className={styles.pokemon_name}>{capitalizeFirstWord(pokemon.name)}</h2>
+          </div> */}
+          <h2 className={styles.pokemon_name}>
+            {capitalizeFirstWord(pokemon.name)}
           </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+          <PokemonCard
+            imgPokemonSrc={officialSprite}
+            imgBackgroundSrc={Grass}
+          />
+          <PromptCard />
+          <SummaryCard
+            height={pokemon.height}
+            weight={pokemon.weight}
+            location={pokemon['0'].location_area.name}
+            id={pokemon.id}
+            type={pokemon.types[0].type.name}
+          />
+          <PokemonCard
+            imgPokemonSrc={dreamWorldSprite}
+            imgBackgroundSrc={Grass}
+          />
+          <PokemonCard imgPokemonSrc={homeSprite} imgBackgroundSrc={Grass} />
+          <DislikeButton />
+        </div>
+      </main>
+    )
+  } catch (error) {
+    return <div>Error fetching: {JSON.stringify(error)}</div>
+  }
 }

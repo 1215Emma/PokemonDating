@@ -1,0 +1,33 @@
+
+.cards {
+  position: relative;
+  background-color: white;
+  border-radius: 10px;
+  min-width: 100%;
+  margin: 1rem 0;
+}
+
+.pokemon_image_container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 30rem;
+  max-height: 30rem;
+  /* height: 20rem; */
+  width: 20rem;
+}
+
+.pokemon_image {
+  position: absolute;
+  z-index: 2;
+}
+
+.pokemon_background {
+  position: absolute;
+  border-radius: 5px;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}

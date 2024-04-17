@@ -1,0 +1,25 @@
+
+.cards {
+  position: relative;
+  background-color: white;
+  border-radius: 10px;
+  min-width: 100%;
+  margin: 1rem 0;
+}
+
+.prompt {
+  display: flex;
+  flex-direction: column;
+  min-height: 12rem;
+  padding: 2rem;
+}
+
+.promptHeader {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.promptResponse {
+  font-size: 1.75rem;
+  padding-top: 1rem;
+}
