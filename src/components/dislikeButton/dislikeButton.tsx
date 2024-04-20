@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import styles from './dislikeButton.module.css'
-import X from '../../../../public/X.png'
+import X from '@/../public/X.png'
 
 const DislikeButton = () => {
   return (

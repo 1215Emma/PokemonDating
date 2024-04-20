@@ -1,5 +1,5 @@
 import styles from './summaryCard.module.css'
-import capitalizeFirstWord from '@/app/helpers/capitalizeFirstWord'
+import capitalizeFirstWord from '@/helpers/capitalizeFirstWord'
 
 interface SummaryCardProps {
   height: number
@@ -13,7 +13,7 @@ const SummaryCard = (props: SummaryCardProps) => {
   const generation = props.id >= 1 && props.id <= 156 ? 'Kanto' : 'unknown'
 
   let typeStyle = {}
-  if (props.type == 'grass') {
+  if (props.type == 'Grass') {
     typeStyle = {
       display: 'inline-block',
       padding: ' 0 5px',
@@ -39,14 +39,14 @@ const SummaryCard = (props: SummaryCardProps) => {
         <div className={styles.keyBio}>
           <p>Height: {props.height}m</p>
           <p>Weight: {props.weight / 10}kg</p>
-          <p>Location: {capitalizeFirstWord(props.location)}</p>
+          <p>Location: {props.location}</p>
         </div>
         <div className={styles.keySubBio}>
           <p>Id: {props.id}</p>
           <p>Generation: {generation}</p>
           <div className={styles.typeContainer}>
             <p>Type: </p>
-            <p style={typeStyle}>{capitalizeFirstWord(props.type)}</p>
+            <p style={typeStyle}>{props.type}</p>
           </div>
         </div>
       </div>
