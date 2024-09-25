@@ -10,11 +10,19 @@ type LikedContent = {
 interface LikeCardPopupProps {
   likedContent: LikedContent
   setLikedContent: (likedContent: LikedContent) => void
+  isLikeCardOpen: boolean
+  setIsLikeCardOpen: (isLikeCardOpen: boolean) => void
 }
 
 const LikeCardPopup = (props: LikeCardPopupProps) => {
   return (
     <div className={styles.container}>
+      <button
+        className={styles.closePopup}
+        onClick={() => props.setIsLikeCardOpen(false)}
+      >
+        x
+      </button>
       <Image
         src={props.likedContent.picture}
         height={200}

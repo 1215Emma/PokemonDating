@@ -44,6 +44,8 @@ const MatchContainer = (props: MatchContainerProps) => {
           <LikeCardPopup
             likedContent={likedContent}
             setLikedContent={setLikedContent}
+            isLikeCardOpen={isLikeCardOpen}
+            setIsLikeCardOpen={setIsLikeCardOpen}
           />
         </React.Fragment>
       )}
