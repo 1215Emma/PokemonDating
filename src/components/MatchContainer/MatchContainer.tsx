@@ -9,33 +9,26 @@ import PromptCard from '../promptCard/promptCard'
 import SummaryCard from '../summaryCard/summaryCard'
 import DislikeButton from '../dislikeButton/dislikeButton'
 import LikeCardPopup from '../LikeCardPopup/LikeCardPopup'
+import { MatchContainerData, LikedContent } from '@/helpers/types'
 
-interface MatchContainerProps {
-  name: string
-  height: number
-  weight: number
-  location: string
-  id: number
-  type: string
-  officialSprite: string
-  dreamWorldSprite: string
-  homeSprite: string
-  imgBackgroundSrc: StaticImageData
-}
-
-interface LikedContent {
-  picture: string
-  imgBg: StaticImageData
-  prompt: string
-}
-const MatchContainer = (props: MatchContainerProps) => {
+const MatchContainer: React.FC<MatchContainerData> = ({
+  name,
+  height,
+  weight,
+  location,
+  id,
+  type,
+  officialSprite,
+  dreamWorldSprite,
+  homeSprite,
+  imgBackgroundSrc,
+}) => {
   const [isLikeCardOpen, setIsLikeCardOpen] = useState(false)
   const [likedContent, setLikedContent] = useState<LikedContent>({
     picture: '',
     imgBg: { src: '', height: 0, width: 0 },
     prompt: '',
   })
-  console.log('likedContent', likedContent)
   return (
     <div className={styles.container}>
       {isLikeCardOpen && (
@@ -50,37 +43,34 @@ const MatchContainer = (props: MatchContainerProps) => {
         </React.Fragment>
       )}
       <div className={styles.matchContainer}>
-        <h2 className={styles.pokemon_name}>
-          {capitalizeFirstWord(props.name)}
-        </h2>
+        <h2 className={styles.pokemon_name}>{capitalizeFirstWord(name)}</h2>
         <PokemonCard
-          imgPokemonSrc={props.officialSprite}
-          imgBackgroundSrc={props.imgBackgroundSrc}
+          imgPokemonSrc={officialSprite}
+          imgBackgroundSrc={imgBackgroundSrc}
           isLikeCardOpen={isLikeCardOpen}
           setIsLikeCardOpen={setIsLikeCardOpen}
           likedContent={likedContent}
           setLikedContent={setLikedContent}
-          //   prompt={''}
         />
         <PromptCard />
         <SummaryCard
-          height={props.height}
-          weight={props.weight}
-          location={capitalizeFirstWord(props.location)}
-          id={props.id}
-          type={capitalizeFirstWord(props.type)}
+          height={height}
+          weight={weight}
+          location={capitalizeFirstWord(location)}
+          id={id}
+          type={capitalizeFirstWord(type)}
         />
         <PokemonCard
-          imgPokemonSrc={props.dreamWorldSprite}
-          imgBackgroundSrc={props.imgBackgroundSrc}
+          imgPokemonSrc={dreamWorldSprite}
+          imgBackgroundSrc={imgBackgroundSrc}
           isLikeCardOpen={isLikeCardOpen}
           setIsLikeCardOpen={setIsLikeCardOpen}
           likedContent={likedContent}
           setLikedContent={setLikedContent}
         />
         <PokemonCard
-          imgPokemonSrc={props.homeSprite}
-          imgBackgroundSrc={props.imgBackgroundSrc}
+          imgPokemonSrc={homeSprite}
+          imgBackgroundSrc={imgBackgroundSrc}
           isLikeCardOpen={isLikeCardOpen}
           setIsLikeCardOpen={setIsLikeCardOpen}
           likedContent={likedContent}

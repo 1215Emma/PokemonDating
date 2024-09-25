@@ -1,36 +1,29 @@
 import Image, { StaticImageData } from 'next/image'
 import styles from './likeButton.module.css'
 import Love_ball from '@/../public/Love_ball.png'
+import { PokemonCardData } from '@/helpers/types'
 
-type LikedContent = {
-  picture: string
-  imgBg: StaticImageData
-  prompt: string
-}
-
-interface LikeButtonsProps {
-  imgPokemonSrc: string
-  imgBackgroundSrc: StaticImageData
-  isLikeCardOpen: boolean
-  setIsLikeCardOpen: (isLikeCardOpen: boolean) => void
-  likedContent: LikedContent
-  setLikedContent: (likedContent: LikedContent) => void
-}
-
-const LikeButton = (props: LikeButtonsProps) => {
+const LikeButton: React.FC<PokemonCardData> = ({
+  imgPokemonSrc,
+  imgBackgroundSrc,
+  isLikeCardOpen,
+  setIsLikeCardOpen,
+  likedContent,
+  setLikedContent,
+}) => {
   return (
     <button
       type="button"
       className={styles.like_button}
       onClick={() => {
-        props.setIsLikeCardOpen(true)
-        props.setLikedContent({
-          picture: props.imgPokemonSrc,
-          imgBg: props.imgBackgroundSrc,
+        setIsLikeCardOpen(true)
+        setLikedContent({
+          picture: imgPokemonSrc,
+          imgBg: imgBackgroundSrc,
           prompt: '',
         })
       }}
-      disabled={props.isLikeCardOpen}
+      disabled={isLikeCardOpen}
     >
       <Image
         src={Love_ball}

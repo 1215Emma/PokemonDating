@@ -1,19 +1,18 @@
 import styles from './summaryCard.module.css'
 import capitalizeFirstWord from '@/helpers/capitalizeFirstWord'
+import { SummaryCardData } from '@/helpers/types'
 
-interface SummaryCardProps {
-  height: number
-  weight: number
-  location: string
-  id: number
-  type: string
-}
-
-const SummaryCard = (props: SummaryCardProps) => {
-  const generation = props.id >= 1 && props.id <= 156 ? 'Kanto' : 'unknown'
+const SummaryCard: React.FC<SummaryCardData> = ({
+  height,
+  weight,
+  location,
+  id,
+  type,
+}) => {
+  const generation = id >= 1 && id <= 156 ? 'Kanto' : 'unknown'
 
   let typeStyle = {}
-  if (props.type == 'Grass') {
+  if (type == 'Grass') {
     typeStyle = {
       display: 'inline-block',
       padding: ' 0 5px',
@@ -37,16 +36,16 @@ const SummaryCard = (props: SummaryCardProps) => {
     <div className={`${styles.matchDescription} ${styles.cards}`}>
       <div className={styles.matchDescriptionOverview}>
         <div className={styles.keyBio}>
-          <p>Height: {props.height}m</p>
-          <p>Weight: {props.weight / 10}kg</p>
-          <p>Location: {props.location}</p>
+          <p>Height: {height}m</p>
+          <p>Weight: {weight / 10}kg</p>
+          <p>Location: {location}</p>
         </div>
         <div className={styles.keySubBio}>
-          <p>Id: {props.id}</p>
+          <p>Id: {id}</p>
           <p>Generation: {generation}</p>
           <div className={styles.typeContainer}>
             <p>Type: </p>
-            <p style={typeStyle}>{props.type}</p>
+            <p style={typeStyle}>{type}</p>
           </div>
         </div>
       </div>
